@@ -1,0 +1,14 @@
+{
+  "name": "azops",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^6.0.2"
+  }
+}
