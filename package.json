@@ -6,7 +6,10 @@
   "scripts": {
     "start": "electron ."
   },
-  "author": "",
+  "author": {
+    "name": "Adilson Pavan",
+    "email": "adilson.pavan@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "electron": "^6.0.2"
