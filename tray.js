@@ -29,7 +29,7 @@ module.exports = function createTray() {
         { type: "separator" },
         {
             label: "GitHub", click() {
-                shell.openExternal('https://github.com/CellarD0-0r/whatever')
+                shell.openExternal('https://github.com/pavanad/azops')
             }
         }
     ])
