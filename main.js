@@ -4,7 +4,22 @@ const electron = require('electron');
 
 const app = electron.app
 const createTray = require('./tray');
-const createWindow = require('./window');
+const {setExiting, createWindow} = require('./window');
+
+let mainWindow;
+
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
+
+app.on('second-instance', () => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.show();
+  }
+})
 
 /*
  * This method will be called when Electron has finished
@@ -13,24 +28,20 @@ const createWindow = require('./window');
  */
 app.on('ready', () => {
   createTray()
-  createWindow()
-})
-
-/*
- * Quit when all windows are closed.
- * On OS X it is common for applications and their menu bar
- * to stay active until the user quits explicitly with Cmd + Q
- */
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+  mainWindow = createWindow()
+});
 
 /*
  * On macOS it's common to re-create a window in the app when the
  * dock icon is clicked and there are no other windows open.
  */
-app.on('activate', () => {  
-  createWindow()  
-})
+app.on('activate', () => {
+  mainWindow.show()
+});
+
+app.on('before-quit', () => {  
+  setExiting(true);
+  if (!mainWindow.isFullScreen()) {
+    settings.set('lastWindowState', mainWindow.getBounds());
+  }
+});

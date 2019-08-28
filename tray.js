@@ -9,7 +9,7 @@ const Menu = electron.Menu
 const shell = electron.shell
 const path = require('path')
 
-const createWindow = require('./window');
+const {createWindow} = require('./window');
 
 let tray, contextMenu
 
